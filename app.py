@@ -8,9 +8,9 @@ import streamlit.components.v1 as components
 # ---------------------------
 # Your core modules (main)
 # ---------------------------
-from core.data_fetcher import fetch_price_data
-from core.indicators import add_indicators
-from core.signal_engine import TradingStyle, generate_breakout_advice, safe_float
+from data_fetcher import fetch_price_data
+from indicators import add_indicators
+from signal_engine import TradingStyle, generate_breakout_advice, safe_float
 
 # ---------------------------
 # Advanced features imports (robust)
@@ -18,30 +18,30 @@ from core.signal_engine import TradingStyle, generate_breakout_advice, safe_floa
 
 # pattern_detector -> analyze_patterns
 try:
-    from core.pattern_detector import analyze_patterns
+    from pattern_detector import analyze_patterns
 except Exception:
     try:
-        from core.pattern_detector import analyze_patterns
+        from pattern_detector import analyze_patterns
     except Exception:
         def analyze_patterns(df: pd.DataFrame):
             return []
 
 # key_levels -> get_key_levels
 try:
-    from core.key_levels import get_key_levels
+    from key_levels import get_key_levels
 except Exception:
     try:
-        from core.key_levels import calc_key_levels as get_key_levels
+        from key_levels import calc_key_levels as get_key_levels
     except Exception:
         def get_key_levels(df: pd.DataFrame):
             return {}
 
 # mtf_engine -> get_mtf_strength_map
 try:
-    from core.mtf_engine import get_mtf_strength_map
+    from mtf_engine import get_mtf_strength_map
 except Exception:
     try:
-        from core.mtf_engine import analyze_mtf as _analyze_mtf
+        from mtf_engine import analyze_mtf as _analyze_mtf
 
         def get_mtf_strength_map(df: pd.DataFrame):
             m = _analyze_mtf(df) or {}
@@ -58,7 +58,7 @@ except Exception:
 
 # Optional: trend scanner & risk model & volume heatmap (fallback stubs)
 try:
-    from core.trend_scanner import scan_trends as scan_trends
+    from trend_scanner import scan_trends as scan_trends
 except Exception:
     def scan_trends(df: pd.DataFrame) -> Dict[str, Any]:
         # lightweight fallback: EMA cross quick check
@@ -75,7 +75,7 @@ except Exception:
         return out
 
 try:
-    from core.risk_manager import evaluate_risk as evaluate_risk
+    from risk_manager import evaluate_risk as evaluate_risk
 except Exception:
     def evaluate_risk(df: pd.DataFrame, capital: float, risk_pct: float) -> Dict[str, Any]:
         # Very simple fallback risk sizing
@@ -88,7 +88,7 @@ except Exception:
             return {}
 
 try:
-    from core.volume_heatmap import build_volume_heatmap as build_volume_heatmap
+    from volume_heatmap import build_volume_heatmap as build_volume_heatmap
 except Exception:
     def build_volume_heatmap(df: pd.DataFrame):
         # fallback: return basic volume summary
@@ -791,3 +791,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
