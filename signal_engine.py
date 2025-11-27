@@ -3,8 +3,8 @@ from typing import Dict, Any, List
 import pandas as pd
 import numpy as np
 
-from .ml_model import ml_predict_direction
-from .risk_manager import position_sizing
+from ml_model import ml_predict_direction
+from risk_manager import position_sizing
 
 class TradingStyle(Enum):
     INTRADAY = auto()
@@ -142,3 +142,4 @@ def generate_breakout_advice(
         "ml": ml_view,
         "risk": risk_info
     }
+
