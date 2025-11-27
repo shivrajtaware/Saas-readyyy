@@ -4,7 +4,7 @@ import pandas as pd
 from typing import Dict
 
 from config import MODEL_PATH
-from .features import make_features, FEATURE_COLS
+from features import make_features, FEATURE_COLS
 
 _model = None  # lazy-loaded model
 
@@ -74,3 +74,4 @@ def ml_predict_direction(df_with_indicators: pd.DataFrame) -> Dict:
         "label": label,
         "source": "ml"
     }
+
